@@ -1,34 +1,35 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { Routes, Route, Link } from "react-router-dom";
+import InfosPage from './components/infos';
+import FragementsPage from './components/fragements/fragementsPage';
+
 
 function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
 
   return (
     <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
-    </>
+   <h1>Everyday Dev's Code wallet</h1>
+     <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/FragementsPage">Fragements</Link>
+          </li>
+          <li>
+            <Link to="/InfosPage">Infos</Link>
+          </li>
+        </ul>
+      </nav>
+
+     
+       <Routes>
+            <Route path='/FragementsPage' element={<FragementsPage/>}/>
+            <Route path='/InfosPage' element={<InfosPage/>}/>
+       </Routes>
+       </>
+       
   )
 }
 
