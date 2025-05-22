@@ -21,4 +21,10 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
   // You can expose other APTs you need here.
   // ...
-})
+
+  
+  
+});
+
+// Electron store for the snippet expose here
+
