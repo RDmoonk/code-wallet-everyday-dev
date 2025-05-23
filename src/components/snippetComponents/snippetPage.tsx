@@ -6,9 +6,6 @@ import { Badge } from "@/components/ui/badge";
 // for the syntaxic color of the code 
 
 
-
-
-
 interface Snippet {
   title: string;
   code: string;
@@ -42,6 +39,27 @@ const handleEdit = (index: number) => {
   navigate("/SnippetForm");
 };
 
+// this is for the copy to clipboard
+const handleCopy = (code: string) => {
+  // Option 1: Electron clipboard (if nodeIntegration or preload is set up)
+  try {
+    const { clipboard } = window.require?.('electron') || {};
+    if (clipboard) {
+      clipboard.writeText(code);
+    } else if (navigator.clipboard) {
+      // Fallback: Web Clipboard API
+      navigator.clipboard.writeText(code);
+    }
+    alert("Copied to clipboard!");
+  } catch (err) {
+    console.error("Copy failed", err);
+    alert("Failed to copy");
+  }
+};
+
+
+
+
 
 
     return(
@@ -61,7 +79,6 @@ const handleEdit = (index: number) => {
             <pre className="bg-gray-100 p-2 rounded my-2 text-sm overflow-auto">
               <code>{snippet.code}</code>
             </pre>
-
              <div className="flex flex-wrap gap-2 mt-2">
     {Array.isArray(snippet.tags) &&
       snippet.tags.map((tag: string, i: number) => (
@@ -69,23 +86,24 @@ const handleEdit = (index: number) => {
       ))}
   </div>
 
-  {/* edit and delete buttons */}
+  {/* edit, delete and copy buttons */}
 <div className="mt-4 flex gap-2">
+  {/* the edit button that will edit by getting the index of the snippet */}
     <Button
       variant="outline"
       onClick={() => handleEdit(index)}
-      className="bg-mantis border-mantis hover:bg-light-mantis"
-    >
-      Edit
-    </Button>
+      className="bg-mantis border-mantis hover:bg-light-mantis">Edit</Button>
+    
+    {/* The delet button that will delete the snippet by screah with the index */}
     <Button
       variant="destructive"
       onClick={() => handleDelete(index)}
-      className="bg-veronica hover:bg-light-veronica"
-    >
-      Delete
-    </Button>
+      className="bg-veronica hover:bg-light-veronica">Delete</Button>
+
+       {/* Copy button that will execute the action when you click it */}
+              <Button variant="outline"onClick={() => handleCopy(snippet.code)} className="bg-african-violet border-africain-violet text-black hover:bg-light-african-violet">Copy</Button>
   </div>
+ 
            
           </div>))}
       </div>
