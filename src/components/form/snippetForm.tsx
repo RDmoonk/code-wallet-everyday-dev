@@ -9,20 +9,25 @@ import { Link, Routes, Route } from "react-router"
 import Editor from "./editor"
 import { useEffect, useState } from "react"
 import SnippetPage from "../snippetComponents/snippetPage"
+import { Badge } from "@/components/ui/badge"
 
 export default function SnippetForm(){
 
   const [code, setCode] = useState("");
 
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState("");
+
     const formSchema = z.object({
   title: z.string().min(2).max(50),
+  tags: z.array(z.string().min(1)).optional(), // <-- supports multiple tags
 })
 
 // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
+      title: "", tags: []
     },
   })
 
@@ -41,13 +46,22 @@ export default function SnippetForm(){
   const snippet = {
     title: values.title,
     code,
-    tag: "html" // nedd to be dynamic
+    tags,
   };
 
    const saved = localStorage.getItem("snippets");
   const snippets = saved ? JSON.parse(saved) : [];
 
-  snippets.push(snippet);
+  const editIndex = localStorage.getItem("editSnippetIndex");
+
+  if(editIndex !== null){
+    snippets[parseInt(editIndex)] = snippet;
+    localStorage.removeItem("editSnippetIndex");
+  } else {
+    snippets.push(snippet);
+  }
+
+  // snippets.push(snippet);
   localStorage.setItem("snippets", JSON.stringify(snippets));
   }
 
@@ -68,6 +82,7 @@ useEffect(() => {
         <>
          <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {/* Title's part of the form */}
         <FormField
           control={form.control}
           name="title"
@@ -75,27 +90,76 @@ useEffect(() => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="shadcn" {...field} required />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                Enter a title
               </FormDescription>
               <FormMessage />
 
+               <FormItem>
+    <div className="space-y-2">
+  <FormLabel>Tags</FormLabel>
+  <div className="flex gap-2">
+    <Input
+      value={tagInput}
+      placeholder="Add a tag"
+      onChange={(e) => setTagInput(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          if (tagInput && !tags.includes(tagInput)) {
+            setTags([...tags, tagInput]);
+            setTagInput("");
+          }
+        }
+      }}
+    />
+    <Button
+      type="button"
+      onClick={() => {
+        if (tagInput && !tags.includes(tagInput)) {
+          setTags([...tags, tagInput]);
+          setTagInput("");
+        }
+      }}
+    >
+      Add
+    </Button>
+  </div>
+  <div className="flex flex-wrap gap-2 mt-2">
+    {tags.map((tag, index) => (
+      <Badge key={index} variant="outline">
+        {tag}
+        <button
+          className="ml-1 text-red-500"
+          type="button"
+          onClick={() => setTags(tags.filter((_, i) => i !== index))}
+        >
+          ×
+        </button>
+      </Badge>
+    ))}
+  </div>
+</div>
+      <FormMessage />
+    </FormItem>
+
+              {/* The editor is a component here */}
               <Editor value={code} onChange={setCode} />
-
-
-              
             </FormItem>
+            
           )}
         />
+
         
-        <Button type="submit">Submit</Button>
+        
+        <Button>Submit</Button>
       </form>
     </Form>
 
     <Link to='/SnippetPage'>
-        <Button>Cancel</Button>
+        <Button>Back</Button>
         </Link>
 
          <Routes>
