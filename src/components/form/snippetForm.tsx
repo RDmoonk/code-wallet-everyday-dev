@@ -3,7 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import { Form,FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
+import { Form,FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
+// FormDescription
 import { Input } from "@/components/ui/input"
 import { Link, Routes, Route } from "react-router"
 import Editor from "./editor"
@@ -93,12 +94,12 @@ useEffect(() => {
               <FormLabel className="mt-5">Title</FormLabel>
               <FormControl>
                  <div className="flex gap-2 m-2">
-                <Input placeholder="shadcn" {...field} required className="min-w-full" />
+                <Input placeholder="Enter a title" {...field} required className="min-w-full" />
                 </div>
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 Enter a title
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
               </div>
 

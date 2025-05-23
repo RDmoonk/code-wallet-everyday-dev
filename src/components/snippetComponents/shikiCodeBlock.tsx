@@ -1,4 +1,5 @@
-// components/ShikiCodeBlock.tsx
+// components/ShikiCodeBlock
+// This component is used so the app can render the code of the snippets with highlights
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -34,7 +35,7 @@ export default function ShikiCodeBlock({ code, lang = "typescript" }: Props) {
 
   return (
     <div
-      className="overflow-auto rounded-md text-sm"
+      className="overflow-auto rounded-md text-sm mt-3"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

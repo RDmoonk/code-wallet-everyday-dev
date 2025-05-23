@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 // for the syntaxic color of the code 
 import ShikiCodeBlock from "./shikiCodeBlock";
+// modal of alert
+import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
+
 
 
 interface Snippet {
@@ -16,6 +19,8 @@ interface Snippet {
 export default function SnippetPage(){
 
      const [snippets, setSnippets] = useState<Snippet[]>([]);
+
+     
 
       useEffect(() => {
     const saved = localStorage.getItem("snippets");
@@ -58,6 +63,11 @@ const handleCopy = (code: string) => {
   }
 };
 
+// for the alert in case the delete button is clicked
+
+
+
+
 
 
 
@@ -67,7 +77,7 @@ const handleCopy = (code: string) => {
         <>
 
         <div className="p-4">
-      <h2 className="text-xl font-bold mb-4 text-jet">Snippets</h2>
+      <h2 className="text-xl font-bold mb-5 text-jet">Snippets</h2>
 
       <div className="grid gap-4">
         {snippets.map((snippet, index) => (
@@ -98,13 +108,35 @@ const handleCopy = (code: string) => {
       className="bg-mantis border-mantis hover:bg-light-mantis">Edit</Button>
     
     {/* The delet button that will delete the snippet by screah with the index */}
-    <Button
+    {/* <Button
       variant="destructive"
       onClick={() => handleDelete(index)}
-      className="bg-veronica hover:bg-light-veronica">Delete</Button>
+      className="bg-veronica hover:bg-light-veronica">Delete</Button> */}
+
+      {/* delete with an alert */}
+          <AlertDialog>
+  <AlertDialogTrigger>
+    <Button className="bg-veronica hover:bg-light-veronica text-jet">Delete</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle className="text-jet">Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your snippet.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel className="text-jet">Cancel</AlertDialogCancel>
+      <AlertDialogAction  onClick={() => handleDelete(index)} className="bg-veronica hover:bg-light-veronica">
+        yes, let's delete
+        </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
 
        {/* Copy button that will execute the action when you click it */}
-              <Button variant="outline"onClick={() => handleCopy(snippet.code)} className="bg-african-violet border-africain-violet text-black hover:bg-light-african-violet">Copy</Button>
+              <Button variant="outline"onClick={() => handleCopy(snippet.code)} className="bg-light-african-violet border-african-violet text-black hover:bg-african-violet">Copy</Button>
   </div>
  
            
@@ -117,6 +149,9 @@ const handleCopy = (code: string) => {
         </Link>
       </div>
     </div>
+
+
+
         </>
     );
 }
