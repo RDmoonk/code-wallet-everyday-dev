@@ -5,9 +5,10 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form,FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router"
+import { Link, Routes, Route } from "react-router"
 import Editor from "./editor"
 import { useEffect, useState } from "react"
+import SnippetPage from "../snippetComponents/snippetPage"
 
 export default function SnippetForm(){
 
@@ -36,6 +37,18 @@ export default function SnippetForm(){
     // this part is served to save everything once the submit button is clicked
     localStorage.setItem("formValues", JSON.stringify(values));
   localStorage.setItem("codeSnippet", code);
+
+  const snippet = {
+    title: values.title,
+    code,
+    tag: "html" // nedd to be dynamic
+  };
+
+   const saved = localStorage.getItem("snippets");
+  const snippets = saved ? JSON.parse(saved) : [];
+
+  snippets.push(snippet);
+  localStorage.setItem("snippets", JSON.stringify(snippets));
   }
 
 
@@ -76,6 +89,7 @@ useEffect(() => {
             </FormItem>
           )}
         />
+        
         <Button type="submit">Submit</Button>
       </form>
     </Form>
@@ -83,6 +97,11 @@ useEffect(() => {
     <Link to='/SnippetPage'>
         <Button>Cancel</Button>
         </Link>
+
+         <Routes>
+        <Route path='/SnippetPage/*' element={<SnippetPage/>}/>
+        </Routes>
+       
         
         
         
