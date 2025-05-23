@@ -4,6 +4,7 @@ import Snippet from "./snippet";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 // for the syntaxic color of the code 
+import ShikiCodeBlock from "./shikiCodeBlock";
 
 
 interface Snippet {
@@ -76,9 +77,11 @@ const handleCopy = (code: string) => {
           >
             <h3 className="font-semibold">{snippet.title}</h3>
 
-            <pre className="bg-gray-100 p-2 rounded my-2 text-sm overflow-auto">
+            {/* <pre className="bg-gray-100 p-2 rounded my-2 text-sm overflow-auto">
               <code>{snippet.code}</code>
-            </pre>
+            </pre> */}
+            <ShikiCodeBlock code={snippet.code} />
+
              <div className="flex flex-wrap gap-2 mt-2">
     {Array.isArray(snippet.tags) &&
       snippet.tags.map((tag: string, i: number) => (

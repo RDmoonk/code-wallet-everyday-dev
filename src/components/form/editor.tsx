@@ -4,7 +4,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
 import { javascript } from "@codemirror/lang-javascript";
-// import { oneDark } from "@codemirror/theme-one-dark";
+import { oneDark } from "@codemirror/theme-one-dark";
 
 interface EditorProps {
   value: string;
@@ -17,7 +17,7 @@ export default function Editor({ value, onChange }: EditorProps) {
       value={value}
       height="200px"
       extensions={[html(), css(), javascript()]}
-      // theme={oneDark}
+      theme={oneDark}
       onChange={onChange}
       className="border-2 min-w-full"
     />
