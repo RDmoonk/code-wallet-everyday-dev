@@ -15,7 +15,7 @@ export default function Editor({ value, onChange }: EditorProps) {
   return (
     <CodeMirror
       value={value}
-      height="200px"
+      height="500px"
       extensions={[html(), css(), javascript()]}
       theme={oneDark}
       onChange={onChange}
