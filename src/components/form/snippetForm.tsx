@@ -1,16 +1,17 @@
 // import Editor from "./editor"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import { Form,FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Form,FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
 // FormDescription
-import { Input } from "@/components/ui/input"
-import { Link, Routes, Route } from "react-router"
-import Editor from "./editor"
-import { useEffect, useState } from "react"
-import SnippetPage from "../snippetComponents/snippetPage"
-import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input";
+import { Link, Routes, Route } from "react-router";
+import Editor from "./editor";
+import { useEffect, useState } from "react";
+import SnippetPage from "../snippetComponents/snippetPage";
+import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router";
 
 export default function SnippetForm(){
 
@@ -18,6 +19,8 @@ export default function SnippetForm(){
 
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
+
+  const navigate = useNavigate();
 
     const formSchema = z.object({
   title: z.string().min(2).max(50),
@@ -64,6 +67,9 @@ export default function SnippetForm(){
 
 
   localStorage.setItem("snippets", JSON.stringify(snippets));
+
+  // naviagte to the SnippetPage once the submit is done
+   navigate("/SnippetPage");
   }
 
 

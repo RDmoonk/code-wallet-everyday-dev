@@ -94,6 +94,12 @@ const handleCopy = (code: string) => {
         <div className="p-4">
       <h2 className="text-xl font-bold mb-5 text-jet">Snippets</h2>
 
+       <div className="mb-6">
+        <Link to="/SnippetForm">
+          <Button className="bg-mantis text-black hover:bg-light-mantis">Add Snippet</Button>
+        </Link>
+      </div>
+
       <div className="grid gap-4">
         {snippets.map((snippet, index) => (
           <div
@@ -160,11 +166,7 @@ const handleCopy = (code: string) => {
           </div>))}
       </div>
 
-      <div className="mt-6">
-        <Link to="/SnippetForm">
-          <Button className="bg-mantis text-black hover:bg-light-mantis">Add Snippet</Button>
-        </Link>
-      </div>
+     
     </div>
         </>
     );
