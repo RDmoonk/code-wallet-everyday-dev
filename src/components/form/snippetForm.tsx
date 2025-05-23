@@ -132,7 +132,7 @@ useEffect(() => {
           setTagInput("");
         }
       }}
-      className="bg-mantis hover:bg-light-mantis text-jet shadow-sm">
+      className="bg-mantis hover:bg-light-mantis text-jet shadow-sm w-1/15">
       Add
     </Button>
   </div>

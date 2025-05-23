@@ -6,7 +6,11 @@ import { Badge } from "@/components/ui/badge";
 // for the syntaxic color of the code 
 import ShikiCodeBlock from "./shikiCodeBlock";
 // modal of alert
-import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
+import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Terminal } from "lucide-react";
+
+
 
 
 
@@ -19,6 +23,10 @@ interface Snippet {
 export default function SnippetPage(){
 
      const [snippets, setSnippets] = useState<Snippet[]>([]);
+
+    //  this is values that will be used for the copy alert
+     const [showAlert, setShowAlert] = useState(false);
+
 
      
 
@@ -46,36 +54,43 @@ const handleEdit = (index: number) => {
 };
 
 // this is for the copy to clipboard
+// const handleCopy = (code: string) => {
+//   // Option 1: Electron clipboard (if nodeIntegration or preload is set up)
+//   try {
+//     const { clipboard } = window.require?.('electron') || {};
+//     if (clipboard) {
+//       clipboard.writeText(code);
+//     } else if (navigator.clipboard) {
+//       // Fallback: Web Clipboard API
+//       navigator.clipboard.writeText(code);
+//     }
+//     alert("Copied to clipboard!");
+//   } catch (err) {
+//     console.error("Copy failed", err);
+//     alert("Failed to copy");
+//   }
+// };
+
 const handleCopy = (code: string) => {
-  // Option 1: Electron clipboard (if nodeIntegration or preload is set up)
   try {
     const { clipboard } = window.require?.('electron') || {};
     if (clipboard) {
       clipboard.writeText(code);
     } else if (navigator.clipboard) {
-      // Fallback: Web Clipboard API
       navigator.clipboard.writeText(code);
     }
-    alert("Copied to clipboard!");
+
+    // ✅ Show the alert correctly
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
   } catch (err) {
     console.error("Copy failed", err);
-    alert("Failed to copy");
+    // Optionally show a different alert
+    setShowAlert(true);
   }
 };
-
-// for the alert in case the delete button is clicked
-
-
-
-
-
-
-
-
-
     return(
         <>
-
         <div className="p-4">
       <h2 className="text-xl font-bold mb-5 text-jet">Snippets</h2>
 
@@ -106,12 +121,6 @@ const handleCopy = (code: string) => {
       variant="outline"
       onClick={() => handleEdit(index)}
       className="bg-mantis border-mantis hover:bg-light-mantis">Edit</Button>
-    
-    {/* The delet button that will delete the snippet by screah with the index */}
-    {/* <Button
-      variant="destructive"
-      onClick={() => handleDelete(index)}
-      className="bg-veronica hover:bg-light-veronica">Delete</Button> */}
 
       {/* delete with an alert */}
           <AlertDialog>
@@ -138,6 +147,14 @@ const handleCopy = (code: string) => {
        {/* Copy button that will execute the action when you click it */}
               <Button variant="outline"onClick={() => handleCopy(snippet.code)} className="bg-light-african-violet border-african-violet text-black hover:bg-african-violet">Copy</Button>
   </div>
+
+      {/* This alert will let you knwon if you the copy did itself */}
+        {showAlert && (
+          <Alert className="mb-4 mt-4 border-mantis bg-green-50 text-green-800">
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Copied!</AlertTitle>
+            <AlertDescription>The code was copied to your clipboard.</AlertDescription>
+            </Alert>)}
  
            
           </div>))}
@@ -149,9 +166,6 @@ const handleCopy = (code: string) => {
         </Link>
       </div>
     </div>
-
-
-
         </>
     );
 }
