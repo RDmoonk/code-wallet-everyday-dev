@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router";
 import Snippet from "./snippet";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+// for the syntaxic color of the code 
+
+
+
 
 
 interface Snippet {
@@ -12,8 +16,6 @@ interface Snippet {
 }
 
 export default function SnippetPage(){
-
-   
 
      const [snippets, setSnippets] = useState<Snippet[]>([]);
 
@@ -46,7 +48,7 @@ const handleEdit = (index: number) => {
         <>
 
         <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Snippets</h2>
+      <h2 className="text-xl font-bold mb-4 text-jet">Snippets</h2>
 
       <div className="grid gap-4">
         {snippets.map((snippet, index) => (
@@ -63,7 +65,7 @@ const handleEdit = (index: number) => {
              <div className="flex flex-wrap gap-2 mt-2">
     {Array.isArray(snippet.tags) &&
       snippet.tags.map((tag: string, i: number) => (
-        <Badge key={i} variant="outline">{tag}</Badge>
+        <Badge key={i} variant="outline" className="bg-african-violet border-african-violet">{tag}</Badge>
       ))}
   </div>
 
@@ -72,12 +74,14 @@ const handleEdit = (index: number) => {
     <Button
       variant="outline"
       onClick={() => handleEdit(index)}
+      className="bg-mantis border-mantis hover:bg-light-mantis"
     >
       Edit
     </Button>
     <Button
       variant="destructive"
       onClick={() => handleDelete(index)}
+      className="bg-veronica hover:bg-light-veronica"
     >
       Delete
     </Button>
@@ -88,14 +92,10 @@ const handleEdit = (index: number) => {
 
       <div className="mt-6">
         <Link to="/SnippetForm">
-          <Button>Add Snippet</Button>
+          <Button className="bg-mantis text-black hover:bg-light-mantis">Add Snippet</Button>
         </Link>
       </div>
     </div>
-
-        {/* <Link to='/SnippetForm'>
-        <Button>Add</Button>
-        </Link> */}
         </>
     );
 }

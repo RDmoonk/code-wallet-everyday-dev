@@ -61,7 +61,7 @@ export default function SnippetForm(){
     snippets.push(snippet);
   }
 
-  // snippets.push(snippet);
+
   localStorage.setItem("snippets", JSON.stringify(snippets));
   }
 
@@ -80,27 +80,34 @@ useEffect(() => {
 
     return(
         <>
+        <div className="p-2 m-2">
          <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 border-2 border-jet p-2 rounded-2xl shadow-lg">
         {/* Title's part of the form */}
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <div className="space-y-2">
+              <FormLabel className="mt-5">Title</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} required />
+                 <div className="flex gap-2 m-2">
+                <Input placeholder="shadcn" {...field} required className="min-w-full" />
+                </div>
               </FormControl>
               <FormDescription>
                 Enter a title
               </FormDescription>
               <FormMessage />
+              </div>
 
                <FormItem>
-    <div className="space-y-2">
+                
+                
+    <div className="space-y-2 m-3">
   <FormLabel>Tags</FormLabel>
-  <div className="flex gap-2">
+  <div className="flex flex-col gap-2 m-3 ">
     <Input
       value={tagInput}
       placeholder="Add a tag"
@@ -114,6 +121,7 @@ useEffect(() => {
           }
         }
       }}
+      className="min-w-full"
     />
     <Button
       type="button"
@@ -123,7 +131,7 @@ useEffect(() => {
           setTagInput("");
         }
       }}
-    >
+      className="bg-mantis hover:bg-light-mantis text-jet shadow-sm">
       Add
     </Button>
   </div>
@@ -154,18 +162,21 @@ useEffect(() => {
 
         
         
-        <Button>Submit</Button>
+        <Button className="mr-2 bg-mantis hover:bg-light-mantis text-jet shadow-sm">Submit</Button>
+
+           <Link to='/SnippetPage'>
+        <Button className="bg-veronica hover:bg-light-veronica shadow-sm">Back</Button>
+        </Link>
+        
       </form>
     </Form>
 
-    <Link to='/SnippetPage'>
-        <Button>Back</Button>
-        </Link>
+ 
 
          <Routes>
         <Route path='/SnippetPage/*' element={<SnippetPage/>}/>
         </Routes>
-       
+       </div>
         
         
         
