@@ -52,24 +52,6 @@ const handleEdit = (index: number) => {
   navigate("/SnippetForm");
 };
 
-// this is for the copy to clipboard
-// const handleCopy = (code: string) => {
-//   // Option 1: Electron clipboard (if nodeIntegration or preload is set up)
-//   try {
-//     const { clipboard } = window.require?.('electron') || {};
-//     if (clipboard) {
-//       clipboard.writeText(code);
-//     } else if (navigator.clipboard) {
-//       // Fallback: Web Clipboard API
-//       navigator.clipboard.writeText(code);
-//     }
-//     alert("Copied to clipboard!");
-//   } catch (err) {
-//     console.error("Copy failed", err);
-//     alert("Failed to copy");
-//   }
-// };
-
 const handleCopy = (code: string) => {
   try {
     const { clipboard } = window.require?.('electron') || {};

@@ -1,10 +1,8 @@
-// import Editor from "./editor"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form,FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
-// FormDescription
 import { Input } from "@/components/ui/input";
 import { Link, Routes, Route } from "react-router";
 import Editor from "./editor";
@@ -104,9 +102,6 @@ useEffect(() => {
                 <Input placeholder="Enter a title" {...field} required className="min-w-full" />
                 </div>
               </FormControl>
-              {/* <FormDescription>
-                Enter a title
-              </FormDescription> */}
               <FormMessage />
               </div>
 
