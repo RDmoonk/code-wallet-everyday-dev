@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router";
-import Snippet from "./snippet";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 // for the syntaxic color of the code 
@@ -91,6 +90,7 @@ const handleCopy = (code: string) => {
 };
     return(
         <>
+        <div className="sans-font">
         <div className="p-4">
       <h2 className="text-xl font-bold mb-5 text-jet">Snippets</h2>
 
@@ -167,6 +167,7 @@ const handleCopy = (code: string) => {
       </div>
 
      
+    </div>
     </div>
         </>
     );

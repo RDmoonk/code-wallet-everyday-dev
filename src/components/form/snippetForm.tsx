@@ -87,6 +87,7 @@ useEffect(() => {
 
     return(
         <>
+        <div className="sans-font">
         <div className="p-2 m-2">
          <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 border-2 border-jet p-2 rounded-2xl shadow-lg">
@@ -185,9 +186,7 @@ useEffect(() => {
         <Route path='/SnippetPage/*' element={<SnippetPage/>}/>
         </Routes>
        </div>
-        
-        
-        
+       </div>
         </>
     )
 }
