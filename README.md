@@ -1,33 +1,76 @@
-# React + TypeScript + Vite
+# Code Wallet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A desktop application for developers to store, organize, and easily retrieve code snippets.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [About](#about)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Build](#build)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## About
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+**Code Wallet** is a desktop app built with Electron and React that helps developers efficiently manage their code snippets locally. It supports syntax highlighting, tagging, and clipboard copy features, aiming to improve developer productivity.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
+
+## Features
+
+- Store and organize code snippets locally (using `localStorage`)
+- Add, edit, and delete snippets
+- Tag snippets for easy categorization
+- Syntax highlighting for multiple languages (JavaScript, HTML, CSS, Python, etc.)
+- Copy snippet code to clipboard with one click
+- Simple and intuitive multi-page UI (Fragments list, Snippet form, Info page)
+- Built-in developer info and legal mentions page
+
+---
+
+## Technologies
+
+- **Electron** – Desktop application framework
+- **React** – UI components
+- **Vite** – Frontend build tool
+- **CodeMirror** – Code editor with syntax highlighting
+- **Shiki** – Syntax highlighter for code snippets
+- **Tailwind CSS & shadcn UI** – Styling and UI components
+- **electron-store** – Optional for local persistent storage (if you want to upgrade from localStorage)
+- **React Router** – Page navigation inside the app
+
+---
+(the build version doesn't work)
+## Installation
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+### Steps
+
+```bash
+# Clone the repo
+git clone https://github.com/RDmoonk/code-wallet-everyday-dev.git
+
+# Navigate to project folder
+cd electron-vite-code-wallet
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+
 
 ```
 electron-vite-code-wallet
